@@ -1,10 +1,21 @@
+# Author thejazzid@gmail.com
+
 import configparser, os, sys
 
 def update_default_profile(src_profile):
     """ Store credentials in ./aws/credentials for backward compatibility """
     config_path = os.path.abspath(os.path.expanduser("~/.aws/credentials"))
-    config = configparser.ConfigParser()
+    config = configparser.RawConfigParser()
     config.read(config_path)
+    try:
+        config.remove_option("default","aws_security_token")
+    except Exception:
+        pass
+    try:
+        config.remove_option("default","aws_expiration")
+    except Exception:
+        pass
+
     # Look for the required profile
     if src_profile not in config:
         sys.exit("ERROR: Cannot find profile {} in ~/.aws/credentials".format(src_profile))
@@ -14,7 +25,6 @@ def update_default_profile(src_profile):
     profile["aws_access_key_id"] = source_profile["aws_access_key_id"]
     profile["aws_secret_access_key"] = source_profile["aws_secret_access_key"]
     profile["aws_session_token"] = source_profile["aws_session_token"]
-    #profile["aws_expiration"] = source_profile["aws_expiration"]
 
     with open(config_path, "w") as cred_file:
         config.write(cred_file)
