@@ -34,14 +34,14 @@ if __name__ == '__main__':
     args = sys.argv
     found_key = False
     profile = ""
-    if "--configure" in args:
+    if "--configure" in args or "-c" in args:
         exit()
 
     for arg in args:
         if found_key:
             profile = arg
             break
-        if arg == "--profile":
+        if arg == "--profile" or arg == "-p":
             found_key = True
 
     if profile != "":
