@@ -14,7 +14,7 @@ def update_default_profile(src_profile):
     profile["aws_access_key_id"] = source_profile["aws_access_key_id"]
     profile["aws_secret_access_key"] = source_profile["aws_secret_access_key"]
     profile["aws_session_token"] = source_profile["aws_session_token"]
-    profile["aws_expiration"] = source_profile["aws_expiration"]
+    #profile["aws_expiration"] = source_profile["aws_expiration"]
 
     with open(config_path, "w") as cred_file:
         config.write(cred_file)
