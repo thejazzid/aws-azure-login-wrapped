@@ -28,16 +28,26 @@ def update_default_profile(src_profile):
 
     with open(config_path, "w") as cred_file:
         config.write(cred_file)
+    print("Done.")
 
 if __name__ == '__main__':
     args = sys.argv
     found_key = False
+    profile = ""
+    if "--configure" in args:
+        exit()
+
     for arg in args:
         if found_key:
             profile = arg
             break
         if arg == "--profile":
             found_key = True
-    print("Updating profile Default with credentials from '{}' profile".format(profile))
-    update_default_profile(profile)
-    print("Done.")
+
+    if profile != "":
+        print("Updating profile Default with credentials from '{}' profile".format(profile))
+        update_default_profile(profile)
+
+    else:
+        exit()
+
