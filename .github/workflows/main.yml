@@ -1,0 +1,20 @@
+name: CI
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  build-and-push-docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Running 
+      run: echo Hello, world!
+    - name: Build and push Docker images
+      uses: docker/build-push-action@v1.1.0
+      with:
+        name: thejazzid/aws-azure-login
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        dockerfile: Dockerfile
