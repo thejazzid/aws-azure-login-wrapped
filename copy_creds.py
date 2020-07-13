@@ -18,7 +18,7 @@ def update_default_profile(src_profile):
 
     # Look for the required profile
     if src_profile not in config:
-        sys.exit("ERROR: Cannot find profile {} in ~/.aws/credentials".format(src_profile))
+        sys.exit("ERROR: Cannot find profile {} in ~/.aws/credentials. Try to login to profile first".format(src_profile))
 
     source_profile = config[src_profile]
     profile = config["default"]
